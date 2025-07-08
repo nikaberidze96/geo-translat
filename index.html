@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8" />
+  <title>ქართული → ლათინურად</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    .container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    #input, #output {
+      font-size: 24px;
+      padding: 10px;
+      width: 45%;
+      box-sizing: border-box;
+      height: 300px;
+      resize: vertical;
+      text-align: left;
+    }
+
+    #input {
+      vertical-align: top;
+    }
+
+    #output {
+      border: 2px solid #333;
+      background-color: #f0f0f0;
+      overflow-y: auto;
+    }
+
+    button {
+      font-size: 20px;
+      padding: 10px 20px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>ქართული სიტყვა → ლათინურად</h2>
+
+  <div class="container">
+    <textarea id="input"></textarea>
+    <div id="output"></div>
+  </div>
+
+  <button id="translateBtn">თარგმნა</button>
+
+  <script>
+    const translitMap = {
+      'ა': 'a', 'ბ': 'b', 'გ': 'g', 'დ': 'd', 'ე': 'e',
+      'ვ': 'v', 'ზ': 'z', 'თ': 't', 'ი': 'i', 'კ': 'k',
+      'ლ': 'l', 'მ': 'm', 'ნ': 'n', 'ო': 'o', 'პ': 'p',
+      'ჟ': 'zh', 'რ': 'r', 'ს': 's', 'ტ': 't', 'უ': 'u',
+      'ფ': 'f', 'ქ': 'k', 'ღ': 'gh', 'ყ': 'q', 'შ': 'sh',
+      'ჩ': 'ch', 'ც': 'ts', 'ძ': 'dz', 'წ': 'ts', 'ჭ': 'ch',
+      'ხ': 'kh', 'ჯ': 'j', 'ჰ': 'h'
+    };
+
+    function translateText() {
+      const input = document.getElementById('input').value;
+      let output = '';
+      for (let char of input) {
+        output += translitMap[char] || char;
+      }
+      document.getElementById('output').innerText = output;
+    }
+
+    document.getElementById('translateBtn').addEventListener('click', translateText);
+
+    // ENTER ღილაკზე დაჭერით თარგმნა
+    document.getElementById('input').addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault(); // არ ჩაწეროს ახალი ხაზი
+        translateText();
+      }
+    });
+  </script>
+</body>
+</html>
+
+
+
